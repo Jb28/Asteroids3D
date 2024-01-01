@@ -29,3 +29,4 @@ C:\projects\Asteroids3D\obj\Debug\net6.0\refint\Asteroids3D.dll
 C:\projects\Asteroids3D\obj\Debug\net6.0\Asteroids3D.pdb
 C:\projects\Asteroids3D\obj\Debug\net6.0\Asteroids3D.genruntimeconfig.cache
 C:\projects\Asteroids3D\obj\Debug\net6.0\ref\Asteroids3D.dll
+C:\projects\Asteroids3D\obj\Debug\net6.0\Asteroids3D.sourcelink.json

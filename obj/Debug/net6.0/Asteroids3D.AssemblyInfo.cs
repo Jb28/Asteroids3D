@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Asteroids3D")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b3def5d314553bd91bdd46d323d56e0724d20af7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Asteroids3D")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Asteroids3D")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
