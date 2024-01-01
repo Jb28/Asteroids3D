@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Asteroids3D.Models;
 using Microsoft.Xna.Framework;
@@ -12,6 +13,7 @@ namespace Asteroids3D
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Model playerShip;
+        private Model asteroidModel;
         private Texture2D otherTexture;
 
         private static float gameWidth = 1920f;
@@ -26,6 +28,8 @@ namespace Asteroids3D
         //private Matrix asteroidProjection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 800f / 480f, 0.1f, 100f);
 
         // Game Variables
+        private DateTime nextAsteroidSpawn;
+        Random randomGenerator = new Random();
 
         //Ship - TODO make this a class
         private Vector3 shipPosition;
@@ -36,6 +40,7 @@ namespace Asteroids3D
         private float shipMovementZSpeed = 0;
         
         private Asteroid asteroid;
+        private List<Asteroid> asteroidsInMotion = new List<Asteroid>();
 
         public Game1()
         {
@@ -62,7 +67,7 @@ namespace Asteroids3D
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             playerShip = Content.Load<Model>("Ship");
-            Model asteroidModel = Content.Load<Model>("LargeAsteroid");
+            asteroidModel = Content.Load<Model>("LargeAsteroid");
             //otherTexture = Content.Load<Texture2D>("GreenShipTexture");
 
             // TODO: use this.Content to load your game content here
@@ -70,7 +75,9 @@ namespace Asteroids3D
             shipPosition = new Vector3(20, 28, 0);
             shipAngle = 0;
 
-            asteroid = new Asteroid(new Vector3(20, 10, 0), Matrix.CreateTranslation(new Vector3(0, 0, 0)), asteroidModel, 0, 0f, 0.05f, 0);
+            //asteroid = new Asteroid(new Vector3(20, 10, 0), Matrix.CreateTranslation(new Vector3(0, 0, 0)), asteroidModel, 0, 0f, 0.05f, 0);
+            asteroidsInMotion.Add(new Asteroid(new Vector3(20, 10, 0), Matrix.CreateTranslation(new Vector3(0, 0, 0)), asteroidModel, 0, 0f, 0.05f, 0));
+            
         }    
 
         protected override void Update(GameTime gameTime)
@@ -115,8 +122,9 @@ namespace Asteroids3D
             // Update world matrix relative to new position
             shipWorldView = Matrix.CreateRotationY(shipAngle) * Matrix.CreateTranslation(shipPosition);
 
-            // Asteroid update           
-            asteroid.Update();
+
+            //asteroid.Update();
+            UpdateAsteroids();
 
             /* Temporary Debugging */
             //Debug.WriteLine("Ship position: X:" + shipPosition.X + " Y:" + shipPosition.Y + " Z:" + shipPosition.Z);
@@ -131,7 +139,10 @@ namespace Asteroids3D
 
             // TODO: Add your drawing code here
             DrawModel(playerShip, shipWorldView, view, projection);
-            DrawModel(asteroid.model, asteroid.worldView, view, projection);
+            asteroidsInMotion.ForEach(asteroid =>
+            {
+                DrawModel(asteroid.model, asteroid.worldView, view, projection);
+            });
             
             base.Draw(gameTime);
         }
@@ -172,6 +183,22 @@ namespace Asteroids3D
                 mesh.Draw();
             }
         }
-    }
 
+        private void UpdateAsteroids()
+        {
+            // Asteroid update
+            if (nextAsteroidSpawn < DateTime.Now)
+            {
+                int randomXPosition = randomGenerator.Next(10, 30);
+                asteroidsInMotion.Add(new Asteroid(new Vector3(randomXPosition, 10, 0), Matrix.CreateTranslation(new Vector3(0, 0, 0)), asteroidModel, 0, 0f, 0.05f, 0));
+                int secondsUntilNextSpawn = randomGenerator.Next(0, 5);
+                nextAsteroidSpawn = DateTime.Now.AddSeconds(secondsUntilNextSpawn);
+            }
+
+            asteroidsInMotion.ForEach(asteroid =>
+            {
+                asteroid.Update();
+            });
+        }
+    }
 }
