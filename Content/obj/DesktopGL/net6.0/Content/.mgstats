@@ -1,0 +1,5 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/projects/Asteroids3D/Content/AsteroidTexture.png","C:/projects/Asteroids3D/Content/bin/DesktopGL/Content/AsteroidTexture_0.xnb","TextureProcessor","Texture2DContent",250103,174897,0.1198466
+"C:/projects/Asteroids3D/Content/LargeAsteroid.fbx","C:/projects/Asteroids3D/Content/bin/DesktopGL/Content/LargeAsteroid.xnb","ModelProcessor","ModelContent",25404,7368,0.1915521
+"C:/projects/Asteroids3D/Content/Ship.fbx","C:/projects/Asteroids3D/Content/bin/DesktopGL/Content/Ship.xnb","ModelProcessor","ModelContent",21772,4632,0.0878243
+"C:/projects/Asteroids3D/Content/ShipTexture.png","C:/projects/Asteroids3D/Content/bin/DesktopGL/Content/ShipTexture.xnb","TextureProcessor","Texture2DContent",1928,1048661,0.0140886
